@@ -8,16 +8,12 @@ export const Comments = ({ comments, publications }) => {
   const navigate = useNavigate()
   const [showModal, setShowModal] = useState(false)
 
-  const handleNavigateToComment = (id) => {
-    navigate(`/comment/${id}`)
-  }
+ 
 
   const handleOpenModal = () => setShowModal(true)
   const handleCloseModal = () => setShowModal(false)
 
   const handleCommentAdded = (newComment) => {
-    console.log('Nuevo comentario:', newComment)
-    // Aquí puedes actualizar la lista de comentarios
     setShowModal(false)
   }
 
@@ -44,10 +40,10 @@ export const Comments = ({ comments, publications }) => {
           <CommentCard
             key={comment._id}
             id={comment._id}
+            title={comment.title}
             content={comment.content}
             userName={comment.userName}
             
-            navigateToCommentHandler={handleNavigateToComment}
           />
         ))}
       </section>

@@ -53,7 +53,7 @@ export const Navbar = () => {
                 />
                 <NavButton
                     text="Comentarios"
-                    onClickHandler={handleNavigateToComments} // Botón para comentarios
+                    onClickHandler={handleNavigateToComments} 
                 />
                
             </div>

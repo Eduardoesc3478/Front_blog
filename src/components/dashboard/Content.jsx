@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { Publications } from '../publications/Publications'
 import { Settings } from '../settings/Settings'
-import { Comments } from '../comments/Comments' // Importa el componente Comments
+import { Comments } from '../comments/Comments' 
 
 import PropTypes from 'prop-types'
 
@@ -12,7 +12,7 @@ export const Content = ({ publications, comments }) => {
         <Routes>
             <Route path='settings' element={<Settings />} />
             <Route path='publications' element={<Publications publications={publications} />} />
-            <Route path='comments' element={<Comments comments={comments} />} /> {/* Nueva ruta para comentarios */}
+            <Route path='comments' element={<Comments comments={comments} />} />
         </Routes>
     </div>
   )

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { addComment } from '../../services/api' // Importa la función para agregar comentarios
-import { usePublications } from '../../shared/hooks/usePublications' // Importa el hook para obtener publicaciones
+import { addComment } from '../../services/api' 
+import { usePublications } from '../../shared/hooks/usePublications' 
 
 export const AddCommentForm = ({ onClose, onCommentAdded }) => {
   const [formData, setFormData] = useState({
@@ -11,7 +11,7 @@ export const AddCommentForm = ({ onClose, onCommentAdded }) => {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  // Usa el hook para obtener las publicaciones
+
   const { allPublications, isFetching } = usePublications()
 
   const handleChange = (e) => {
@@ -32,16 +32,14 @@ export const AddCommentForm = ({ onClose, onCommentAdded }) => {
     try {
       const response = await addComment(formData)
       if (response.error) {
-        console.error('Error al agregar el comentario:', response.e)
         alert('Error al agregar el comentario. Inténtalo de nuevo.')
         return
       }
-      onCommentAdded(response.data) // Notifica al componente padre que se agregó un comentario
+      onCommentAdded(response.data) 
       setFormData({ content: '', userName: '', postId: '' })
-      onClose() // Cierra el formulario
-      window.location.reload() // Recarga la página
+      onClose() 
+      window.location.reload() 
     } catch (error) {
-      console.error('Error inesperado:', error)
       alert('Error inesperado. Inténtalo de nuevo.')
     } finally {
       setIsSubmitting(false)
@@ -111,6 +109,6 @@ export const AddCommentForm = ({ onClose, onCommentAdded }) => {
 }
 
 AddCommentForm.propTypes = {
-  onClose: PropTypes.func.isRequired, // Función para cerrar el formulario
-  onCommentAdded: PropTypes.func.isRequired, // Función para manejar el comentario agregado
+  onClose: PropTypes.func.isRequired, 
+  onCommentAdded: PropTypes.func.isRequired, 
 }
