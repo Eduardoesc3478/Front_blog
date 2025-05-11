@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useUserDetails } from '../../shared/hooks'
 import PropTypes from 'prop-types'
 
 const NavLogo = ({ onClickHandler }) => {
@@ -35,14 +34,13 @@ NavButton.propTypes = {
 }
 
 export const Navbar = () => {
-    const { isLogged, logout } = useUserDetails()
     const navigate = useNavigate()
     const [navVisible, setNavVisible] = useState(false)
 
-    const handleNavigateToAuthPage = () => navigate("/auth")
-    const handleNavigateToSettings = () => navigate("/settings")
+    
+  
     const handleNavigateToPublications = () => navigate("/publications")
-    const handleLogout = () => logout()
+    const handleNavigateToComments = () => navigate("/comments") 
     const toggleNavVisibility = () => setNavVisible(!navVisible)
 
     return (
@@ -50,23 +48,14 @@ export const Navbar = () => {
             <NavLogo onClickHandler={toggleNavVisibility} />
             <div className={`nav-buttons-container ${navVisible ? "visible" : ""}`}>
                 <NavButton
-                    text="Inicio"
+                    text="Publicaciones"
                     onClickHandler={handleNavigateToPublications}
                 />
-                {!isLogged ? (
-                    <NavButton
-                        text="Iniciar Sesión"
-                        onClickHandler={handleNavigateToAuthPage}
-                    />
-                ) : (
-                    <>
-                        <NavButton
-                            text="Mi Cuenta"
-                            onClickHandler={handleNavigateToSettings}
-                        />
-                        <NavButton text="Cerrar Sesión" onClickHandler={handleLogout} />
-                    </>
-                )}
+                <NavButton
+                    text="Comentarios"
+                    onClickHandler={handleNavigateToComments} // Botón para comentarios
+                />
+               
             </div>
         </div>
     )

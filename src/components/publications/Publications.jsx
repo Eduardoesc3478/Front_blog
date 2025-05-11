@@ -4,23 +4,19 @@ import PropTypes from 'prop-types'
 import { PublicationCard } from './PublicationCard'
 
 export const Publications = ({ publications }) => {
-  const navigate = useNavigate()
-
-  const handleNavigateToPublication = (id) => {
-    navigate(`/publication/${id}`)
-  }
+  
 
   return (
     <div className='publications-container'>
       {publications.map((p) => (
         <PublicationCard
-          key={p.id}
-          id={p.id}
+          key={p._id}
+          id={p._id}
           title={p.title}
           text={p.text}
           class={p.class}
           status={p.status}
-          navigateToPublicationHandler={handleNavigateToPublication}
+          
         />
       ))}
     </div>

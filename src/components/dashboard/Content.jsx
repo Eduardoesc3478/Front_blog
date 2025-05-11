@@ -2,14 +2,17 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { Publications } from '../publications/Publications'
 import { Settings } from '../settings/Settings'
+import { Comments } from '../comments/Comments' // Importa el componente Comments
+
 import PropTypes from 'prop-types'
 
-export const Content = ({ publications, getPublications }) => {
+export const Content = ({ publications, comments }) => {
   return (
     <div className='content-container'>
         <Routes>
             <Route path='settings' element={<Settings />} />
             <Route path='publications' element={<Publications publications={publications} />} />
+            <Route path='comments' element={<Comments comments={comments} />} /> {/* Nueva ruta para comentarios */}
         </Routes>
     </div>
   )
@@ -25,5 +28,16 @@ Content.propTypes = {
       status: PropTypes.bool
     })
   ).isRequired,
-  getPublications: PropTypes.func.isRequired
+  comments: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+      user: PropTypes.shape({
+        _id: PropTypes.string,
+        name: PropTypes.string,
+      }),
+      postId: PropTypes.string.isRequired,
+      status: PropTypes.bool.isRequired,
+    })
+  ).isRequired
 }

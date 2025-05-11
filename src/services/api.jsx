@@ -54,6 +54,17 @@ export const getPublications = async () => {
     }
 }
 
+export const getPublicationById = async (id) => {
+    try{
+        return await apiBlog.get(`/publication/${id}`)
+    }catch(e){
+        return{
+            error: true,
+            e
+        }
+    }
+}
+
 export const addComment = async (data) => {
     try{
         return await apiBlog.post('/comment/addComment', data)
@@ -65,11 +76,22 @@ export const addComment = async (data) => {
     }
 }
 
-export const getComments = async () => {
-    try{
+export const getComments = async (postId) => {
+    try {
+        return await apiBlog.get(`/comment/${postId}`) // Ajusta la ruta para incluir el postId
+    } catch (e) {
+        return {
+            error: true,
+            e
+        }
+    }
+}
+
+export const getAllComments = async () => {
+    try {
         return await apiBlog.get('/comment/')
-    }catch(e){
-        return{
+    } catch (e) {
+        return {
             error: true,
             e
         }
