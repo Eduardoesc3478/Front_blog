@@ -1,13 +1,35 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { PublicationCard } from './PublicationCard'
 
+const CLASS_OPTIONS = [
+  { value: '', label: 'Todas las categorías' },
+  { value: 'TECNOLOGIA', label: 'Tecnología' },
+  { value: 'TALLER', label: 'Taller' },
+  { value: 'PRACTICA_SUPERVISADA', label: 'Práctica Supervisada' }
+]
+
 export const Publications = ({ publications }) => {
-  
+  const [selectedClass, setSelectedClass] = useState('')
+
+  const filteredPublications = selectedClass
+    ? publications.filter((p) => p.class === selectedClass)
+    : publications
 
   return (
     <div className='publications-container'>
-      {publications.map((p) => (
+      <div style={{ marginBottom: 16 }}>
+        <select
+          value={selectedClass}
+          onChange={e => setSelectedClass(e.target.value)}
+          className="filter-dropdown"
+        >
+          {CLASS_OPTIONS.map(opt => (
+            <option key={opt.value} value={opt.value}>{opt.label}</option>
+          ))}
+        </select>
+      </div>
+      {filteredPublications.map((p) => (
         <PublicationCard
           key={p._id}
           id={p._id}
@@ -15,7 +37,6 @@ export const Publications = ({ publications }) => {
           text={p.text}
           class={p.class}
           status={p.status}
-          
         />
       ))}
     </div>
